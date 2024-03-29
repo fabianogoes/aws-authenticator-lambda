@@ -138,7 +138,6 @@ compile_commands.json
 Makefile
 Makefile.in
 *.cmake
-*.txt
 *.xml
 *.json
 *.zip
