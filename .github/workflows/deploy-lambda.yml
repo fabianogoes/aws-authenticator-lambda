@@ -1,4 +1,4 @@
-name: deploy-py-lambda
+name: CI/CD
 on:
   push:
     branches:

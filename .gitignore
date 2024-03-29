@@ -142,3 +142,7 @@ Makefile.in
 *.json
 *.zip
 **/*.Identifier
+
+boto3/
+dotenv/
+jwt/
