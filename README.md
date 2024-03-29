@@ -1,5 +1,7 @@
 # Authenticator - Lambda Functions da API Tech Challenge
 
+[![deploy-py-lambda](https://github.com/fabianogoes/fiap-tech-challenge-authenticator-lambda/actions/workflows/deploy-lambda.yml/badge.svg)](https://github.com/fabianogoes/fiap-tech-challenge-authenticator-lambda/actions/workflows/deploy-lambda.yml)
+
 - [Authenticator - Lambda Functions da API Tech Challenge](#authenticator---lambda-functions-da-api-tech-challenge)
   - [Relationship](#relationship)
   - [Setup and Build](#setup-and-build)
