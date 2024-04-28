@@ -15,13 +15,11 @@ def lambda_handler(event, context):
     print(event)
 
     cpf = event["cpf"]
-    user = event["user"]
-    email = event["email"]
 
-    return autenticate(cpf, user, email)
+    return autenticate(cpf)
 
 
-def autenticate(cpf, user, email):
+def autenticate(cpf):
     print(f"SECRET={SECRET}")
 
     lambda_client = boto3_client('lambda')
@@ -37,12 +35,17 @@ def autenticate(cpf, user, email):
         user_json = json.loads(response_str)
         print(f"users_response = {user_json}")
         
+        body = user_json["body"]
+        name = body['name']
+        email = body['email']
+        print(cpf, name, email)
+        
         exp = datetime.now() + timedelta(minutes=60)
         print("exp:", exp)
         
         encoded_jwt = jwt.encode({
             "sub": cpf, 
-            "user": user, 
+            "user": name, 
             "email": email, 
             "exp": exp,
             "iat": datetime.now(),
@@ -70,5 +73,5 @@ def autenticate(cpf, user, email):
 if __name__ == '__main__':
     print("--- Running locally ---")
     context = None
-    event = {'cpf': '11122233344', 'user': 'fabiano', 'email': 'fabianogoes@gmail.com'}
+    event = {'cpf': '11122233344', 'user': 'fabiano', 'email': 'fabiano@gmail.com'}
     print(lambda_handler(event, context))
