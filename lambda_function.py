@@ -26,7 +26,7 @@ def autenticate(cpf, user, email):
 
     lambda_client = boto3_client('lambda')
     users_payload = {"cpf": cpf}
-    response = lambda_client.invoke(FunctionName="tech-challenge-users-lambda",
+    response = lambda_client.invoke(FunctionName="fiap-tech-challenge-users-lambda",
         InvocationType='RequestResponse',
         Payload=json.dumps(users_payload)
     )
