@@ -10,24 +10,24 @@ from datetime import timedelta, datetime
 
 load_dotenv()
 SECRET = os.getenv("SECRET")
+VERSION = "2024-04-28-2"
 
 def lambda_handler(event, context):
     print("*********** the event is: *************")
+    print(VERSION)
     print(event)
 
     cpf = event["cpf"]
-    user = event["user"]
-    email = event["email"]
 
-    return autenticate(cpf, user, email)
+    return autenticate(cpf)
 
 
-def autenticate(cpf, user, email):
+def autenticate(cpf):
     print(f"SECRET={SECRET}")
 
     lambda_client = boto3_client('lambda')
     users_payload = {"cpf": cpf}
-    response = lambda_client.invoke(FunctionName="tech-challenge-users-lambda",
+    response = lambda_client.invoke(FunctionName="fiap-tech-challenge-users-lambda",
         InvocationType='RequestResponse',
         Payload=json.dumps(users_payload)
     )
@@ -38,12 +38,17 @@ def autenticate(cpf, user, email):
         user_json = json.loads(response_str)
         print(f"users_response = {user_json}")
         
+        body = user_json["body"]
+        name = body['name']
+        email = body['email']
+        print(cpf, name, email)
+        
         exp = datetime.now() + timedelta(minutes=60)
         print("exp:", exp)
         
         encoded_jwt = jwt.encode({
             "sub": cpf, 
-            "user": user, 
+            "user": name, 
             "email": email, 
             "exp": exp,
             "iat": datetime.now(),
@@ -71,5 +76,5 @@ def autenticate(cpf, user, email):
 if __name__ == '__main__':
     print("--- Running locally ---")
     context = None
-    event = {'cpf': '11122233344', 'user': 'fabiano', 'email': 'fabianogoes@gmail.com'}
+    event = {'cpf': '11122233344', 'user': 'fabiano', 'email': 'fabiano@gmail.com'}
     print(lambda_handler(event, context))
