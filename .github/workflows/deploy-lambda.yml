@@ -32,7 +32,8 @@ jobs:
           cp -r .venv/lib/python3.10/site-packages/charset_normalizer ./charset_normalizer                 
           cp -r .venv/lib/python3.10/site-packages/idna ./idna                 
           cp -r .venv/lib/python3.10/site-packages/urllib3 ./urllib3                 
-          zip -r lambda_function.zip jwt/ requests/ urllib3/ jmespath/ charset_normalizer/ idna/ certifi/ .env lambda_function.py
+          cp -r .venv/lib/python3.10/site-packages/certifi ./certifi                 
+          zip -r lambda_function.zip jwt/ requests/ urllib3/ certifi/ charset_normalizer/ idna/ certifi/ .env lambda_function.py
       - name: Deploy
         run: |
           aws lambda update-function-code --function-name fiap-tech-challenge-authenticator-lambda --zip-file fileb://./lambda_function.zip          
