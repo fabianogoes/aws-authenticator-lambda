@@ -23,7 +23,7 @@ def autenticate(cpf):
 
     base_url = 'http://ad138951fd8104be09fe5a294412a372-107152645.us-east-1.elb.amazonaws.com:8080/customers/cpf/'
     url = base_url + cpf
-    response = requests.get(url)
+    response = requests.get(url, timeout=60)
 
     if response.status_code == 200:
         data = response.json()
