@@ -31,7 +31,8 @@ jobs:
           cp -r .venv/lib/python3.10/site-packages/dotenv ./dotenv   
           cp -r .venv/lib/python3.10/site-packages/boto3 ./boto3                 
           cp -r .venv/lib/python3.10/site-packages/requests ./requests                 
-          zip -r lambda_function.zip jwt/ dotenv/ boto3/ requests/ .env lambda_function.py
+          cp -r .venv/lib/python3.10/site-packages/charset_normalizer ./charset_normalizer                 
+          zip -r lambda_function.zip jwt/ dotenv/ boto3/ requests/ charset_normalizer/ .env lambda_function.py
       - name: Deploy
         run: |
           aws lambda update-function-code --function-name fiap-tech-challenge-authenticator-lambda --zip-file fileb://./lambda_function.zip          
