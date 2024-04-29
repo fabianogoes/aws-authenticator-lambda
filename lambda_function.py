@@ -1,12 +1,8 @@
 import jwt
 import os
-import json
 import requests
-from boto3 import client as boto3_client
-from dotenv import load_dotenv
 from datetime import timedelta, datetime
 
-load_dotenv()
 SECRET = os.getenv("SECRET")
 
 def lambda_handler(event, context):
@@ -23,12 +19,7 @@ def lambda_handler(event, context):
 def autenticate(cpf):
     print(f"SECRET={SECRET}")
 
-    lambda_client = boto3_client('lambda')
     users_payload = {"cpf": cpf}
-    # response = lambda_client.invoke(FunctionName="tech-challenge-users-lambda",
-    #     InvocationType='RequestResponse',
-    #     Payload=json.dumps(users_payload)
-    # )
 
     base_url = 'http://ad138951fd8104be09fe5a294412a372-107152645.us-east-1.elb.amazonaws.com:8080/customers/cpf/'
     url = base_url + cpf
