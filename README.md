@@ -42,7 +42,7 @@ pip install -r requirements.txt
 ```shell
 cp -r .venv/lib/python3.10/site-packages/jwt ./jwt          
 cp -r .venv/lib/python3.10/site-packages/dotenv ./dotenv   
-cp -r .venv/lib/python3.10/site-packages/dotenv ./boto3          
+cp -r .venv/lib/python3.10/site-packages/boto3 ./boto3          
 zip -r lambda_function.zip jwt/ dotenv/ boto3/ .env lambda_function.py
 ```
 
