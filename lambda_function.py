@@ -1,6 +1,9 @@
 import jwt
+import sys
+import logging
 import os
 import json
+import psycopg2
 from boto3 import client as boto3_client
 from dotenv import load_dotenv
 from datetime import timedelta, datetime
