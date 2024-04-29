@@ -1,4 +1,6 @@
 import jwt
+import sys
+import logging
 import os
 import json
 import psycopg2
