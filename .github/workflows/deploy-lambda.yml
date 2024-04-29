@@ -28,13 +28,13 @@ jobs:
           source .venv/bin/activate
           pip install -r requirements.txt
           cp -r .venv/lib/python3.10/site-packages/jwt ./jwt          
-          cp -r .venv/lib/python3.10/site-packages/boto3 ./boto3                 
           cp -r .venv/lib/python3.10/site-packages/requests ./requests                 
           cp -r .venv/lib/python3.10/site-packages/charset_normalizer ./charset_normalizer                 
           cp -r .venv/lib/python3.10/site-packages/idna ./idna                 
           cp -r .venv/lib/python3.10/site-packages/certifi ./certifi                 
           cp -r .venv/lib/python3.10/site-packages/jmespath ./jmespath                 
-          zip -r lambda_function.zip jwt/ requests/ jmespath/ charset_normalizer/ idna/ certifi/ .env lambda_function.py
+          cp -r .venv/lib/python3.10/site-packages/urllib3 ./urllib3                 
+          zip -r lambda_function.zip jwt/ requests/ urllib3/ jmespath/ charset_normalizer/ idna/ certifi/ .env lambda_function.py
       - name: Deploy
         run: |
           aws lambda update-function-code --function-name fiap-tech-challenge-authenticator-lambda --zip-file fileb://./lambda_function.zip          
